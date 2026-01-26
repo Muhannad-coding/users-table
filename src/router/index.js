@@ -5,8 +5,7 @@ import UserTable from '@/components/UserTable.vue'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    components: UserTable,
+    component: UserTable,
   },
 ]
 

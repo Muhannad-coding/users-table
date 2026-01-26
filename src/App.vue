@@ -1,7 +1,7 @@
 <template>
   <main class="app-container">
     <h1>User List</h1>
-    <router-view />
+    <RouterView />
   </main>
 </template>
 
