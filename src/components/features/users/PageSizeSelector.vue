@@ -38,10 +38,14 @@ function changePageSize(event) {
   gap: 0.5rem;
 }
 .page-size select {
-  padding: 0.25rem;
-  font-size: 1rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
 }
 .page-size label {
-  font-weight: bold;
+  font-size: 0.875rem;
+  color: #555;
 }
 </style>

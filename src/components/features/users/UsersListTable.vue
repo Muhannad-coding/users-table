@@ -2,8 +2,6 @@
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   rows: { type: Array, default: () => [] },
-  sort: { type: Object, default: () => ({ key: null, direction: 'asc' }) },
-  toggleSort: { type: Function, required: true },
   currentPage: { type: Number, required: false },
   pageSize: { type: Number, required: false },
 })
@@ -14,18 +12,8 @@ const props = defineProps({
     <thead class="table-head">
       <tr>
         <th class="id table-head-element">ID</th>
-        <th class="table-head-element">
-          <button @click="toggleSort('name')">
-            Name
-            <span v-if="sort.key === 'name'">{{ sort.direction === 'asc' ? '▲' : '▼' }}</span>
-          </button>
-        </th>
-        <th class="table-head-element">
-          <button @click="toggleSort('date')">
-            Registration Date
-            <span v-if="sort.key === 'date'">{{ sort.direction === 'asc' ? '▲' : '▼' }}</span>
-          </button>
-        </th>
+        <th class="table-head-element">Name</th>
+        <th class="table-head-element">Registration Date</th>
         <th class="table-head-element">Address</th>
         <th class="table-head-element">Phone</th>
       </tr>

@@ -3,15 +3,19 @@ import usersData from '@/data/records.json'
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+// Components
 import FilterInput from '@/components/features/users/FilterInput.vue'
 import PageSizeSelector from '@/components/features/users/PageSizeSelector.vue'
 import PaginationButton from '@/components/features/users/PaginationButton.vue'
 import UsersListTable from '@/components/features/users/UsersListTable.vue'
+import SortDropdown from '@/components/features/users/SortDropDown.vue'
 
+// Utils
 import { visiblePagesFun } from '@/utils/visiblePagesFun'
 import { initFormQuery } from '@/utils/initFormQuery'
 import { buildQueryFromState } from '@/utils/buildQueryFromState'
 
+// Composables
 import { usePagination } from './composables/usePagination'
 import { useSorting } from './composables/useSorting'
 import { useFilters } from './composables/useFilters'
@@ -32,7 +36,7 @@ const router = useRouter()
 const { filters, filtered } = useFilters(users)
 
 // Sorting
-const { sort, sorted, toggleSort } = useSorting(filtered)
+const { sort, sorted } = useSorting(filtered)
 
 // Pagination
 const { currentPage, pageSize, totalPages, paginated, goToPage } = usePagination(sorted, {
@@ -63,7 +67,7 @@ watch(
 </script>
 
 <template>
-  <div class="header"><h1>User List</h1></div>
+  <div class="header"><h1>Users List</h1></div>
   <div class="filters">
     <FilterInput v-model="filters.name" placeholder="Muha, John..." label="By name" />
     <FilterInput
@@ -74,15 +78,12 @@ watch(
     <FilterInput v-model="filters.phone" placeholder="+1 (949) 443-30..." label="By phone" />
   </div>
 
-  <PageSizeSelector v-model="pageSize" />
+  <div class="controls">
+    <PageSizeSelector v-model="pageSize" />
+    <SortDropdown v-model="sort" />
+  </div>
 
-  <UsersListTable
-    :rows="paginated"
-    :sort="sort"
-    :toggleSort="toggleSort"
-    :currentPage="currentPage"
-    :pageSize="pageSize"
-  />
+  <UsersListTable :rows="paginated" :sort="sort" :currentPage="currentPage" :pageSize="pageSize" />
 
   <div class="pagination">
     <PaginationButton :disabled="currentPage === 1" @click="goToPage(currentPage - 1)">
@@ -108,13 +109,22 @@ watch(
 <style scoped>
 .header {
   text-align: center;
-  margin: 1rem 0;
+  margin: 2rem 0;
+  border-bottom: 2px solid #eee;
 }
 .filters {
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
   flex-wrap: wrap;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 table {
   width: 100%;
