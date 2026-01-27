@@ -76,7 +76,13 @@ watch(
 
   <PageSizeSelector v-model="pageSize" />
 
-  <UsersListTable :rows="paginated" :sort="sort" :toggleSort="toggleSort" />
+  <UsersListTable
+    :rows="paginated"
+    :sort="sort"
+    :toggleSort="toggleSort"
+    :currentPage="currentPage"
+    :pageSize="pageSize"
+  />
 
   <div class="pagination">
     <PaginationButton :disabled="currentPage === 1" @click="goToPage(currentPage - 1)">

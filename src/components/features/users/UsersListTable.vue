@@ -1,13 +1,12 @@
 <script setup>
-import { ref } from 'vue'
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   rows: { type: Array, default: () => [] },
   sort: { type: Object, default: () => ({ key: null, direction: 'asc' }) },
   toggleSort: { type: Function, required: true },
+  currentPage: { type: Number, required: false },
+  pageSize: { type: Number, required: false },
 })
-
-const idx = ref(0)
 </script>
 
 <template>
@@ -32,8 +31,8 @@ const idx = ref(0)
       </tr>
     </thead>
     <tbody>
-      <tr class="table-row" v-for="user in rows" :key="user.id">
-        <td class="ids">{{ idx }}</td>
+      <tr class="table-row" v-for="(user, index) in rows" :key="user.id">
+        <td class="ids">{{ (currentPage - 1) * pageSize + index + 1 }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.date }}</td>
         <td>{{ user.address }}</td>
