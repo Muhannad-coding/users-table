@@ -25,8 +25,6 @@ export function visiblePagesFun(totalPages, currentPage) {
   if (total > 1) {
     pages.push(total)
   }
-  console.log('totalPages:', totalPages)
-  console.log('currentPage:', currentPage)
-  console.log('visiblePages:', pages)
+
   return pages
 }

@@ -1,6 +1,6 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 
-import UserTable from '@/components/UserTable.vue'
+import UserTable from '@/components/features/users/UsersTable.vue'
 
 const routes = [
   {
