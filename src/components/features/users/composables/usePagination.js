@@ -30,6 +30,13 @@ export function usePagination(itemsRef, initial = { page: 1, pageSize: 10 }) {
     currentPage.value = 1
   })
 
+  watch(
+    () => (itemsRef.value || []).length,
+    () => {
+      currentPage.value = 1
+    },
+  )
+
   return {
     currentPage,
     pageSize,
