@@ -1,6 +1,5 @@
 <template>
   <main class="app-container">
-    <h1>User List</h1>
     <RouterView />
   </main>
 </template>
