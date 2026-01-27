@@ -1,9 +1,19 @@
 <script setup>
 import usersData from '@/data/records.json'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import FilterInput from '@/components/UI/FilterInput.vue'
+import { filterUsers } from '@/utils/filterUsers'
+import { sortUsers } from '@/utils/sortUsers'
+import PageSizeSelector from '@/components/UI/PageSizeSelector.vue'
+import { visiblePagesFun } from '@/utils/visiblePagesFun'
+import PaginationButton from './UI/PaginationButton.vue'
 
-const users = ref(usersData)
+const users = ref(
+  usersData.map((u) => ({
+    ...u,
+    registrationTimestamp: new Date(u.date).getTime(),
+  })),
+)
 
 const filters = ref({
   name: '',
@@ -13,42 +23,22 @@ const filters = ref({
 
 const sort = ref({
   key: null,
-  order: 'asc',
+  direction: 'asc',
 })
 
+const pagination = ref({
+  currentPage: 1,
+  pageSize: 10,
+})
+
+// Filtering
 const filteredUsers = computed(() => {
-  return users.value.filter((user) => {
-    return (
-      user.name.toLowerCase().includes(filters.value.name.toLowerCase()) &&
-      user.address.toLowerCase().includes(filters.value.address.toLowerCase()) &&
-      user.phone.toLowerCase().includes(filters.value.phone.toLowerCase())
-    )
-  })
+  return filterUsers(users.value, filters.value)
 })
 
+// Sorting
 const sortedUsers = computed(() => {
-  const data = [...filteredUsers.value]
-
-  if (!sort.value.key) return data
-
-  return data.sort((a, b) => {
-    let result = 0
-
-    if (sort.value.key === 'date') {
-      result = new Date(a.registrationDate) - new Date(b.registrationDate)
-    }
-
-    if (sort.value.key === 'name') {
-      result = a.name.localeCompare(b.name)
-
-      // multi-column: if names are equal, sort by date
-      if (result === 0) {
-        result = new Date(a.registrationDate) - new Date(b.registrationDate)
-      }
-    }
-
-    return sort.value.direction === 'asc' ? result : -result
-  })
+  return sortUsers(filteredUsers.value, sort.value)
 })
 
 function toggleSort(key) {
@@ -59,6 +49,34 @@ function toggleSort(key) {
     sort.value.direction = 'asc'
   }
 }
+
+// Pagination
+const paginatedUsers = computed(() => {
+  const start = (pagination.value.currentPage - 1) * pagination.value.pageSize
+  const end = start + pagination.value.pageSize
+  return sortedUsers.value.slice(start, end)
+})
+
+const totalPages = computed(() => {
+  return Math.ceil(sortedUsers.value.length / pagination.value.pageSize)
+})
+
+function goToPage(page) {
+  if (page >= 1 && page <= totalPages.value) {
+    pagination.value.currentPage = page
+  }
+}
+
+watch(
+  () => pagination.value.pageSize,
+  () => {
+    pagination.value.currentPage = 1
+  },
+)
+
+const visiblePages = computed(() => {
+  return visiblePagesFun(totalPages.value, pagination.value.currentPage)
+})
 </script>
 
 <template>
@@ -66,6 +84,10 @@ function toggleSort(key) {
     <FilterInput v-model="filters.name" placeholder="Filter by Name" />
     <FilterInput v-model="filters.address" placeholder="Filter by Address" />
     <FilterInput v-model="filters.phone" placeholder="Filter by Phone" />
+  </div>
+  <div class="page-size">
+    <label for="page-size">Rows per page:</label>
+    <PageSizeSelector v-model="pagination.pageSize" />
   </div>
   <table>
     <thead>
@@ -92,7 +114,7 @@ function toggleSort(key) {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="user in sortedUsers" :key="user.id">
+      <tr v-for="user in paginatedUsers" :key="user.id">
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.date }}</td>
@@ -101,6 +123,34 @@ function toggleSort(key) {
       </tr>
     </tbody>
   </table>
+  <div class="pagination">
+    <!-- Prev -->
+    <PaginationButton
+      :disabled="pagination.currentPage === 1"
+      @click="goToPage(pagination.currentPage - 1)"
+    >
+      Prev
+    </PaginationButton>
+
+    <!-- Page numbers -->
+    <PaginationButton
+      v-for="page in visiblePages"
+      :key="page"
+      :active="page === pagination.currentPage"
+      :isDots="page === '...'"
+      @click="goToPage(page)"
+    >
+      {{ page }}
+    </PaginationButton>
+
+    <!-- Next -->
+    <PaginationButton
+      :disabled="pagination.currentPage === totalPages"
+      @click="goToPage(pagination.currentPage + 1)"
+    >
+      Next
+    </PaginationButton>
+  </div>
 </template>
 
 <style scoped>
@@ -112,5 +162,13 @@ function toggleSort(key) {
 table {
   width: 100%;
   border-collapse: collapse;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
 }
 </style>
