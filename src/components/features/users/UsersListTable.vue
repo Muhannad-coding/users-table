@@ -11,7 +11,7 @@ const props = defineProps({
   <table>
     <thead class="table-head">
       <tr>
-        <th class="id table-head-element">ID</th>
+        <th id="id" class="table-head-element">ID</th>
         <th class="table-head-element">Name</th>
         <th class="table-head-element">Registration Date</th>
         <th class="table-head-element">Address</th>
@@ -31,11 +31,12 @@ const props = defineProps({
 </template>
 
 <style scoped>
-.id {
+#id {
   min-width: 15px;
+  text-align: center;
 }
 @media screen and (min-width: 600px) {
-  .id {
+  #id {
     min-width: 30px;
   }
 }
