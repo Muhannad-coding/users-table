@@ -32,7 +32,12 @@ const props = defineProps({
 
 <style scoped>
 .id {
-  min-width: 30px;
+  min-width: 15px;
+}
+@media screen and (min-width: 600px) {
+  .id {
+    min-width: 30px;
+  }
 }
 .ids {
   text-align: center;
@@ -44,6 +49,12 @@ const props = defineProps({
 .table-head-element {
   text-align: left;
   padding: 12px;
+  font-size: 0.725rem;
+}
+@media screen and (min-width: 600px) {
+  .table-head-element {
+    font-size: 1rem;
+  }
 }
 .table-head-element button {
   background: none;
@@ -57,13 +68,13 @@ const props = defineProps({
   padding: 8px;
 }
 .table-row td {
-  padding: 12px;
+  padding: 8px;
   font-size: 0.725rem;
 }
 @media (min-width: 600px) {
   .table-head-element,
   .table-row td {
-    padding: 8px;
+    padding: 12px;
     font-size: 0.875rem;
   }
 }

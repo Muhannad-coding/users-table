@@ -31,11 +31,17 @@ function handleClick() {
 
 <style scoped>
 .pagination-btn {
-  padding: 0.4rem 0.7rem;
+  padding: 0.3rem 0.5rem;
   border: 1px solid #ccc;
   background: white;
   cursor: pointer;
   border-radius: 4px;
+}
+
+@media screen and (min-width: 600px) {
+  .pagination-btn {
+    padding: 0.4rem 0.7rem;
+  }
 }
 
 .pagination-btn:hover:not(.active):not(.dots) {

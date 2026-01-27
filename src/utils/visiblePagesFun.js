@@ -1,7 +1,7 @@
 export function visiblePagesFun(totalPages, currentPage) {
   const total = totalPages
   const current = currentPage
-  const delta = 2 // how many pages before and after current
+  const delta = 1 // how many pages before and after current
 
   const pages = []
 

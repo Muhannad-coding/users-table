@@ -68,19 +68,21 @@ watch(
 
 <template>
   <div class="header"><h1>Users List</h1></div>
-  <div class="filters">
-    <FilterInput v-model="filters.name" placeholder="Muha, John..." label="By name" />
-    <FilterInput
-      v-model="filters.address"
-      placeholder="Eastern Parkway, Dakota... "
-      label="By address"
-    />
-    <FilterInput v-model="filters.phone" placeholder="+1 (949) 443-30..." label="By phone" />
-  </div>
+  <div class="controls-container">
+    <div class="filters">
+      <FilterInput v-model="filters.name" placeholder="Muha, John..." label="By name" />
+      <FilterInput
+        v-model="filters.address"
+        placeholder="Eastern Parkway, Dakota... "
+        label="By address"
+      />
+      <FilterInput v-model="filters.phone" placeholder="+1 (949) 443-30..." label="By phone" />
+    </div>
 
-  <div class="controls">
-    <PageSizeSelector v-model="pageSize" />
-    <SortDropdown v-model="sort" />
+    <div class="controls">
+      <PageSizeSelector v-model="pageSize" />
+      <SortDropdown v-model="sort" />
+    </div>
   </div>
 
   <UsersListTable :rows="paginated" :sort="sort" :currentPage="currentPage" :pageSize="pageSize" />
@@ -112,6 +114,15 @@ watch(
   margin: 2rem 0;
   border-bottom: 2px solid #eee;
 }
+.controls-container {
+  padding: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+  .controls-container {
+    padding: 0;
+  }
+}
 .filters {
   display: flex;
   gap: 1rem;
@@ -135,7 +146,7 @@ table {
   display: flex;
   gap: 0.5rem;
   justify-content: center;
-  margin-top: 1rem;
+  margin: 2rem 1rem;
   flex-wrap: wrap;
 }
 </style>
