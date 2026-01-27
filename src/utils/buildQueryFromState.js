@@ -1,3 +1,6 @@
+// src/utils/buildQueryFromState.js
+// Builds a query object from the current state of filters, sorting, and pagination
+
 export function buildQueryFromState({ filters, sort, currentPage, pageSize }) {
   return {
     name: filters.value.name || undefined,

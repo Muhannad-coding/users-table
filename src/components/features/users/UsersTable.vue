@@ -1,7 +1,9 @@
 <script setup>
-import usersData from '@/data/records.json'
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+
+// Data
+import usersData from '@/data/records.json'
 
 // Components
 import FilterInput from '@/components/features/users/FilterInput.vue'
@@ -20,7 +22,6 @@ import { usePagination } from './composables/usePagination'
 import { useSorting } from './composables/useSorting'
 import { useFilters } from './composables/useFilters'
 
-//Data
 const users = ref(
   usersData.map((u) => ({
     ...u,

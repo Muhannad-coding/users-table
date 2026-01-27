@@ -1,3 +1,6 @@
+// src/utils/visiblePagesFun.js
+// Generates an array of visible page numbers for pagination
+
 export function visiblePagesFun(totalPages, currentPage) {
   const total = totalPages
   const current = currentPage

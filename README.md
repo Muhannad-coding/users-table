@@ -1,23 +1,49 @@
-# users-table
+## User List – Frontend Task
 
-This template should help get you started developing with Vue 3 in Vite.
+## Overview
 
-## Recommended IDE Setup
+This project is a small frontend application built with Vue 3 (Composition API) that displays a list of users with common data‑table features such as filtering, sorting, and pagination.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
 
-## Recommended Browser Setup
+- User list displayed in a responsive table
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Client‑side filtering by:
 
-## Customize configuration
+  Name
+  Address
+  Phone
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Sorting via dropdown selector:
+
+  Newest first
+  Date (Oldest first)
+  Name (A → Z)
+  Name (Z → A)
+
+- Pagination with configurable page size
+
+- Reusable composables for logic isolation
+
+- URL Query Synchronization
+
+  The following state is synchronized with the URL query parameters:
+  Filters
+  Sorting key & direction
+  Current page
+  Page size
+
+  This allows:
+  Bookmarkable views
+  State persistence on refresh
+  Easy sharing of filtered results
+
+## Tech Stack
+
+Vue 3 (Composition API)
+Vue Router (query synchronization)
+Vite (build tool)
+Plain CSS (scoped styles)
 
 ## Project Setup
 
@@ -35,16 +61,4 @@ npm run dev
 
 ```sh
 npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```

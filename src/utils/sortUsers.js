@@ -1,3 +1,6 @@
+// src/utils/sortUsers.js
+// Sorts users based on a specified key and direction
+
 export function sortUsers(users, sort) {
   const data = [...users]
 

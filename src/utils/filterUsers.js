@@ -1,3 +1,6 @@
+// src/utils/filterUsers.js
+// Filters users based on name, phone, and address
+
 export function filterUsers(users, filters) {
   return users.filter((user) => {
     const nameMatch = user.name.toLowerCase().includes(filters.name.toLowerCase())
