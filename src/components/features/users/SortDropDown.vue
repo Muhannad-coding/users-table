@@ -37,8 +37,8 @@ const selectedValue = computed({
 
 <template>
   <div class="sort-dropdown">
-    <label class="sort-label">Sort by</label>
-    <select v-model="selectedValue">
+    <label class="sort-label" for="sort-select">Sort by</label>
+    <select id="sort-select" v-model="selectedValue">
       <option v-for="o in options" :key="o.label" :value="o.label">
         {{ o.label }}
       </option>

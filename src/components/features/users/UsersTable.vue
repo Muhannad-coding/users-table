@@ -71,13 +71,24 @@ watch(
   <div class="header"><h1>Users List</h1></div>
   <div class="controls-container">
     <div class="filters">
-      <FilterInput v-model="filters.name" placeholder="Muha, John..." label="By name" />
       <FilterInput
+        id="by-name"
+        v-model="filters.name"
+        placeholder="Muha, John..."
+        label="By name"
+      />
+      <FilterInput
+        id="by-address"
         v-model="filters.address"
         placeholder="Eastern Parkway, Dakota... "
         label="By address"
       />
-      <FilterInput v-model="filters.phone" placeholder="+1 (949) 443-30..." label="By phone" />
+      <FilterInput
+        id="by-phone"
+        v-model="filters.phone"
+        placeholder="+1 (949) 443-30..."
+        label="By phone"
+      />
     </div>
 
     <div class="controls">
