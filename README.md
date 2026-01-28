@@ -62,3 +62,9 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## Possible Improvements
+
+Server‑side pagination & sorting
+
+Unit tests for composables
