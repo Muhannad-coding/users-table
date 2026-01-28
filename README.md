@@ -40,10 +40,10 @@ This project is a small frontend application built with Vue 3 (Composition API) 
 
 ## Tech Stack
 
-Vue 3 (Composition API)
-Vue Router (query synchronization)
-Vite (build tool)
-Plain CSS (scoped styles)
+- Vue 3 (Composition API)
+- Vue Router (query synchronization)
+- Vite (build tool)
+- Plain CSS (scoped styles)
 
 ## Project Setup
 
