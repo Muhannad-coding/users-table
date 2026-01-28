@@ -61,7 +61,8 @@ function handleClick() {
 }
 
 .pagination-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.8;
+  padding: 0.4rem 0.1rem;
   cursor: not-allowed;
 }
 </style>
